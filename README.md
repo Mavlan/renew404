@@ -1,91 +1,91 @@
 <p align="center">
-  <img src="docs/assets/renew404-hero.svg" alt="Renew404 — local-first renewal tracker" width="100%">
+  <img src="docs/assets/renew404-hero.svg" alt="Renew404——本地优先的续费管家" width="100%">
 </p>
 
 <p align="center">
-  <strong>A private, focused subscription and renewal tracker that runs entirely in your browser.</strong>
+  <strong>一个只专注订阅与续费日期、完全在浏览器中运行的隐私友好工具。</strong>
 </p>
 
 <p align="center">
-  <a href="https://renew.try404.com/">Live demo</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="#install-as-an-app">Install as an app</a> ·
-  <a href="#self-hosting">Self-host</a>
+  <a href="https://renew.try404.com/">在线使用</a> ·
+  <a href="README.en.md">English</a> ·
+  <a href="#安装成-app">安装成 App</a> ·
+  <a href="#自行部署">自行部署</a>
 </p>
 
 <p align="center">
-  <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-ff681a?style=flat-square">
-  <img alt="PWA" src="https://img.shields.io/badge/PWA-offline--ready-171613?style=flat-square">
-  <img alt="Local-first" src="https://img.shields.io/badge/data-local--first-171613?style=flat-square">
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-171613?style=flat-square"></a>
+  <img alt="版本 1.1.0" src="https://img.shields.io/badge/version-1.1.0-ff681a?style=flat-square">
+  <img alt="PWA" src="https://img.shields.io/badge/PWA-支持离线-171613?style=flat-square">
+  <img alt="本地优先" src="https://img.shields.io/badge/数据-本地优先-171613?style=flat-square">
+  <a href="LICENSE"><img alt="MIT 许可证" src="https://img.shields.io/badge/license-MIT-171613?style=flat-square"></a>
 </p>
 
-## Why Renew404?
+## 为什么做 Renew404？
 
-I always wanted a simple app that remembers subscriptions and renewal dates. Most expense trackers can do it, but they felt too heavy for this one job: accounts, memberships, cloud sync, and a lot of bookkeeping I did not need.
+我一直想找一个专门记录订阅和续费日期的 App。试过不少收支管理工具，它们通常也能记录订阅，但对我来说太臃肿：需要注册、需要开会员、依赖云同步，还混合了大量我不需要的记账功能。
 
-A renewal tracker should be able to run in a browser. It should open without registration, work without a subscription fee, and never require you to hand your personal renewal records to an application server. That is why Renew404 exists.
+订阅记录本质上并不复杂。它应该打开浏览器就能用，不需要账号，不需要再为“记录订阅”这件事付一次订阅费，也不应该要求用户把自己的续费记录交给一台应用服务器。
 
-Open it and start. Install it as a PWA if you want an app-like experience. Your records remain in IndexedDB on that device until you choose to export them.
+所以我做了 Renew404：打开就能用；想获得更像 App 的体验，可以安装成 PWA；所有记录默认只保存在这台手机或电脑的浏览器 IndexedDB 中，除非你自己主动导出。
 
-## What it does
+## 它能做什么
 
-| Focused renewal tracking                                                | Private by design                                        |
-| ----------------------------------------------------------------------- | -------------------------------------------------------- |
-| Next renewal date, days remaining, price, currency, and payment history | No login, cloud sync, analytics, ads, or online logo API |
-| Searchable service templates and 17 stable categories                   | Records stay in browser IndexedDB                        |
-| Local brand logos with deterministic category/initial fallbacks         | Manual, portable JSON backup with legacy import support  |
-| Calendar export for system-level reminders                              | Fully usable after the PWA shell has been cached         |
-| Simplified Chinese, Traditional Chinese, English, and Japanese          | Self-hostable as static files on any HTTPS server        |
+| 专注续费管理                               | 隐私是默认设置                       |
+| ------------------------------------------ | ------------------------------------ |
+| 下一次续费、剩余天数、金额、币种和付款历史 | 无需登录、没有云同步、分析追踪或广告 |
+| 可搜索的服务模板和 17 个稳定分类           | 记录保存在浏览器 IndexedDB           |
+| 本地品牌 Logo，以及明确的分类/首字母回退   | 手动、可迁移的 JSON 备份，兼容旧文件 |
+| 导出系统日历，使用手机原生提醒             | 缓存应用后可离线查看和编辑           |
+| 简体中文、繁體中文、English、日本語        | 构建后是纯静态文件，可自行部署       |
 
-Renew404 intentionally does **not** fetch exchange rates or merge unlike currencies. It does **not** run reminder jobs after the PWA is closed; precise reminders are delegated to exported calendar events.
+Renew404 不请求实时汇率，也不会把不同币种擅自合并。PWA 关闭后不会在服务器执行提醒任务；需要精确通知时，请把续费计划导出到系统日历。
 
-## How your data moves
+## 数据去了哪里
 
 ```mermaid
 flowchart LR
-  UI[Renew404 PWA] --> DB[(Browser IndexedDB)]
-  DB --> JSON[JSON backup]
-  DB --> ICS[Calendar export]
-  JSON -->|manual import| DB
-  SERVER[Static web server] -. sends app files only .-> UI
+  UI[Renew404 PWA] --> DB[(浏览器 IndexedDB)]
+  DB --> JSON[JSON 备份]
+  DB --> ICS[日历文件]
+  JSON -->|手动导入| DB
+  SERVER[静态 Web 服务器] -. 只发送应用文件 .-> UI
 ```
 
-The application has no backend API for subscription records. A hosting provider may still retain ordinary HTTP request metadata according to its server configuration; see [Privacy](PRIVACY.md) for the precise boundary.
+应用没有接收订阅记录的后端 API。托管服务仍可能按照服务器配置保存普通 HTTP 请求信息；准确边界请查看[隐私说明](PRIVACY.md)。
 
-## Product tour
+## 产品预览
 
-![Renew404 month, services, and statistics screens](docs/screenshots/overview-en.webp)
+![Renew404 本月、服务与统计页面](docs/screenshots/overview-zh-CN.webp)
 
-![Renew404 service template, add service, and service detail workflow](docs/screenshots/workflow-en.webp)
+![Renew404 服务模板、添加服务与服务详情流程](docs/screenshots/workflow-zh-CN.webp)
 
-![Renew404 local settings and offline PWA launch screen](docs/screenshots/local-first-en.webp)
+![Renew404 本地设置与离线 PWA 启动画面](docs/screenshots/local-first-zh-CN.webp)
 
-## Install as an app
+## 安装成 App
 
-The website works directly in a normal browser. Installing the PWA is recommended on phones because it gets its own home-screen icon and standalone window.
+Renew404 在普通浏览器里可以直接使用。手机用户更推荐安装 PWA：它会拥有独立桌面图标和单独窗口，使用感受更接近原生 App。
 
-### iPhone and iPad
+### iPhone / iPad
 
-1. Open `https://renew.try404.com/` in Safari.
-2. Tap **Share**.
-3. Choose **Add to Home Screen**.
-4. Enable **Open as Web App** if that option is shown, then tap **Add**.
+1. 用 Safari 打开 `https://renew.try404.com/`。
+2. 点击“分享”。
+3. 选择“添加到主屏幕”。
+4. 如果出现“作为网页 App 打开”，保持开启，然后点击“添加”。
 
-See Apple's official [Turn a website into an app in Safari](https://support.apple.com/guide/iphone/open-as-web-app-iphea86e5236/ios) guide.
+可参考 Apple 官方的[在 iPhone 上将网站变成 App](https://support.apple.com/zh-cn/guide/iphone/iphea86e5236/ios)说明。
 
 ### Android
 
-1. Open `https://renew.try404.com/` in Chrome, Edge, or Samsung Internet.
-2. Open the browser menu.
-3. Choose **Install app** or **Add to Home screen**; the wording varies by browser and device.
-4. Launch Renew404 from the new home-screen or app-launcher icon.
+1. 用 Chrome、Edge 或三星浏览器打开 `https://renew.try404.com/`。
+2. 打开浏览器菜单。
+3. 选择“安装应用”或“添加到主屏幕”；不同品牌和浏览器的名称可能略有区别。
+4. 以后从桌面或应用列表里的 Renew404 图标启动。
 
-Use a full browser rather than an in-app browser inside a social or messaging app. Depending on the browser and device, Android may install a WebAPK or a browser-managed shortcut; both launch the PWA without requiring a separately distributed APK. More detail is available in web.dev's [PWA installation guide](https://web.dev/learn/pwa/installation).
+建议使用完整浏览器，不要在微信等应用的内置浏览器里安装。根据手机和浏览器不同，Android 可能安装为 WebAPK，也可能创建由浏览器管理的桌面快捷方式；两者都不需要另行下载 APK。更多原理可查看 web.dev 的 [PWA 安装说明](https://web.dev/learn/pwa/installation?hl=zh-cn)。
 
-## Local development
+## 本地开发
 
-Requirements: Node.js 24 and pnpm 11 or later.
+需要 Node.js 24 和 pnpm 11 或更高版本。
 
 ```bash
 git clone https://github.com/Mavlan/renew404.git
@@ -94,7 +94,7 @@ pnpm install
 pnpm dev
 ```
 
-Production checks:
+提交前完整验收：
 
 ```bash
 pnpm lint
@@ -103,70 +103,70 @@ pnpm build
 pnpm e2e
 ```
 
-Install Playwright Chromium once before the first E2E run:
+首次运行 E2E 前安装 Chromium：
 
 ```bash
 pnpm exec playwright install chromium
 ```
 
-## Self-hosting
+## 自行部署
 
-Renew404 is a static Vue PWA. Build it, then serve the complete `dist/` directory from an HTTPS origin:
+Renew404 是纯静态 Vue PWA。构建后，把完整 `dist/` 放到任意 HTTPS 静态服务器：
 
 ```bash
 pnpm build
 ```
 
-The server must:
+服务器需要满足：
 
-- fall back unknown routes to `index.html`;
-- avoid long-term caching for `index.html`, `sw.js`, and `manifest.webmanifest`;
-- serve hashed assets with immutable caching;
-- expose the site over HTTPS so service workers and installation work correctly.
+- 未知路由回退到 `index.html`；
+- `index.html`、`sw.js` 和 `manifest.webmanifest` 不使用长期缓存；
+- 带 hash 的资源使用 immutable 长缓存；
+- 必须使用 HTTPS，Service Worker 和 PWA 安装才能正常工作。
 
-An Nginx example is provided in [deploy/nginx.conf](deploy/nginx.conf).
+项目提供了 [Nginx 配置示例](deploy/nginx.conf)。
 
-### 1Panel release package
+### 1Panel 发布包
 
-On Windows, use the project release command rather than PowerShell `Compress-Archive`:
+在 Windows 上不要使用 PowerShell `Compress-Archive`，直接运行：
 
 ```powershell
 pnpm release:1panel
 ```
 
-It runs lint, unit tests, build, and mobile E2E, then creates a Linux-safe ZIP whose hashed resources are written before `index.html` and `sw.js`. During deployment, overwrite the complete build without deleting the old hashed assets first.
+命令会依次执行 lint、单元测试、构建和手机端 E2E，再生成 Linux 路径兼容的 ZIP；带 hash 的资源会先写入，`index.html` 和 `sw.js` 最后写入。部署时覆盖完整构建，但不要先删除服务器上旧的 hash 资源。
 
-## Data compatibility
+## 数据兼容承诺
 
-- Dexie database version 2 migrates existing records without clearing services, payments, or settings.
-- The stable system category ID for “Other” is `other`; unmatched legacy names become local custom categories.
-- JSON backup format remains `renew404-backup` version 1.
-- Old backups without `categories`, `categoryId`, `iconKey`, or `locale` remain importable.
-- Templates accelerate data entry but saved services never depend on template definitions.
-- Unknown or removed `iconKey` values use the normal category/initial fallback.
+- Dexie 数据库 v2 会无损迁移旧记录，不清空服务、付款或设置。
+- “其他”的稳定系统分类 ID 为 `other`；无法匹配的旧分类名称会成为本地自定义分类。
+- JSON 备份格式继续使用 `renew404-backup` version 1。
+- 缺少 `categories`、`categoryId`、`iconKey` 或 `locale` 的旧备份仍可导入。
+- 模板只负责快速填写，保存后的服务不依赖模板继续存在。
+- 未知或已经移除的 `iconKey` 会正常回退到分类图标或名称首字母。
 
-Before changing migrations or backup behavior, read [Contributing](CONTRIBUTING.md).
+修改迁移或备份代码前，请先阅读[贡献指南](CONTRIBUTING.md)。
 
-## Technology
+## 技术栈
 
-- Vue 3, TypeScript, Vite, and Pinia
+- Vue 3、TypeScript、Vite、Pinia
 - Dexie / IndexedDB
-- vite-plugin-pwa and Workbox
-- Vitest and Playwright
-- Lucide plus a local, explicit brand-logo whitelist
+- vite-plugin-pwa、Workbox
+- Vitest、Playwright
+- Lucide 与显式维护的本地品牌 Logo 白名单
 
-## Project boundaries
+## 项目边界
 
-Renew404 stays intentionally small. Cloud accounts, automatic sync, analytics, advertising, payment integration, online logo fetching, and live exchange-rate APIs are outside the current product scope.
+Renew404 会继续保持轻量。本阶段不加入云端账号、自动同步、分析追踪、广告、支付接入、在线 Logo 抓取或实时汇率 API。
 
-<!-- Insert the supplied support QR section here before the public announcement. -->
+<!-- 公开发布前，在这里加入用户提供的“请我喝杯咖啡”二维码区域。 -->
 
-## Contributing and security
+## 贡献与安全
 
-Bug reports, translations, accessibility fixes, accurate service templates, and compatibility-preserving improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Please report vulnerabilities privately according to [SECURITY.md](SECURITY.md).
+欢迎提交 Bug、翻译、无障碍改进、准确的服务模板，以及不破坏兼容性的功能优化。提交 PR 前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
 
-Brand names and logos belong to their respective owners and are used only for service identification. See [Third-party notices](THIRD_PARTY_NOTICES.md).
+品牌名称和 Logo 仅用于识别服务，相关权利归各自所有者；详情见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-## License
+## 许可证
 
-Renew404 source code is available under the [MIT License](LICENSE).
+Renew404 源代码使用 [MIT License](LICENSE) 开放。
