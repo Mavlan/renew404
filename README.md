@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/renew404-hero.svg" alt="Renew404 订阅管家——本地优先的续费管理工具" width="100%">
+  <img src="docs/assets/renew404-hero-zh-CN.svg" alt="Renew404 订阅管家——本地优先的续费管理工具" width="100%">
 </p>
 
 <p align="center">
