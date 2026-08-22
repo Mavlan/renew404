@@ -32,7 +32,7 @@
   "dependencies": {
     "@iconify-icons/logos": "2.0.0",
     "@iconify-icons/simple-icons": "2.0.0",
-    "@iconify/vue": "5.0.0",
+    "@iconify/vue": "5.0.1",
     "@lobehub/icons-static-svg": "1.94.0",
     "@lucide/vue": "^1.33.0",
     "date-fns": "^4.4.0",
