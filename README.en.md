@@ -14,6 +14,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Mavlan/renew404/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Mavlan/renew404/actions/workflows/ci.yml/badge.svg?branch=main"></a>
   <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-ff681a?style=flat-square">
   <img alt="PWA" src="https://img.shields.io/badge/PWA-offline--ready-171613?style=flat-square">
   <img alt="Local-first" src="https://img.shields.io/badge/data-local--first-171613?style=flat-square">
