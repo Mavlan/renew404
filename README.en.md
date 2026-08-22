@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="docs/assets/renew404-hero.svg" alt="Renew404 — local-first renewal tracker" width="100%">
+  <img src="docs/assets/renew404-hero.svg" alt="Renew404 Subscription Manager — local-first renewal tracker" width="100%">
 </p>
 
 <p align="center">
-  <strong>A private, focused subscription and renewal tracker that runs entirely in your browser.</strong>
+  <strong>Renew404 Subscription Manager — a private, focused renewal tracker that runs entirely in your browser.</strong>
 </p>
 
 <p align="center">
@@ -110,6 +110,8 @@ pnpm exec playwright install chromium
 ```
 
 ## Self-hosting
+
+If you do not want to self-host, use the public instance provided by Try404 at [renew.try404.com](https://renew.try404.com/). It opens without registration, and your subscription data still remains in this browser on your device.
 
 Renew404 is a static Vue PWA. Build it, then serve the complete `dist/` directory from an HTTPS origin:
 

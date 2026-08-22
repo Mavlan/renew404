@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="docs/assets/renew404-hero.svg" alt="Renew404——本地优先的续费管家" width="100%">
+  <img src="docs/assets/renew404-hero.svg" alt="Renew404 订阅管家——本地优先的续费管理工具" width="100%">
 </p>
 
 <p align="center">
-  <strong>一个只专注订阅与续费日期、完全在浏览器中运行的隐私友好工具。</strong>
+  <strong>Renew404 订阅管家——一个只专注订阅与续费日期、完全在浏览器中运行的隐私友好工具。</strong>
 </p>
 
 <p align="center">
@@ -110,6 +110,8 @@ pnpm exec playwright install chromium
 ```
 
 ## 自行部署
+
+如果不想自行部署，可以直接使用 Try404 提供的在线版本：[renew.try404.com](https://renew.try404.com/)。打开即可使用，无需注册；你的订阅数据仍只保存在当前设备的浏览器中。
 
 Renew404 是纯静态 Vue PWA。构建后，把完整 `dist/` 放到任意 HTTPS 静态服务器：
 
