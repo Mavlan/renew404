@@ -1,0 +1,47 @@
+:root {
+  color-scheme: light dark;
+  text-rendering: optimizeLegibility;
+  --bg: #f5f1e8;
+  --surface: #fffdf8;
+  --surface-strong: #ebe6dc;
+  --text: #171717;
+  --text-muted: #68655e;
+  --line: #d8d2c7;
+  --accent: #ed4f00;
+  --accent-ink: #fffaf2;
+  --success: #18794e;
+  --danger: #b8322c;
+  --warning: #b75d00;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow: 0 12px 30px rgba(44, 34, 22, 0.08);
+  --font-display: 'Aptos Display', 'Segoe UI Variable Display', sans-serif;
+  --font-body: 'Aptos', 'Segoe UI Variable Text', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #171613;
+    --surface: #211f1b;
+    --surface-strong: #302d27;
+    --text: #fff8ec;
+    --text-muted: #bbb3a6;
+    --line: #464139;
+    --accent: #ff681a;
+    --accent-ink: #17120e;
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #171613;
+  --surface: #211f1b;
+  --surface-strong: #302d27;
+  --text: #fff8ec;
+  --text-muted: #bbb3a6;
+  --line: #464139;
+  --accent: #ff681a;
+  --accent-ink: #17120e;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}

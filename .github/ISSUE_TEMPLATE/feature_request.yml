@@ -1,0 +1,34 @@
+name: Feature request / 功能建议
+description: Suggest a focused improvement that preserves Renew404's local-first promise.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 需要解决的问题
+      description: Explain the user problem before describing a solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change / 建议方案
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / 其他方案
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Project boundaries / 项目边界
+      options:
+        - label: This can work without requiring accounts, cloud sync, analytics, or an online logo API.
+          required: true
+        - label: This can preserve existing IndexedDB records and version-1 JSON backup imports.
+          required: true

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN" class="launch-pending">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#171717" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Renew404" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Renew404 续费管家</title>
+    <style>
+      html.launch-pending,
+      html.launch-pending body {
+        background: #171613;
+      }
+
+      html.launch-pending body {
+        overflow: hidden;
+      }
+
+      #renew404-launch {
+        position: fixed;
+        z-index: 10000;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        padding: max(28px, env(safe-area-inset-top)) 28px max(28px, env(safe-area-inset-bottom));
+        background:
+          radial-gradient(circle at 50% 38%, rgba(255, 104, 26, 0.1), transparent 34%),
+          #171613;
+        color: #fff8ec;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 420ms ease, visibility 420ms ease;
+      }
+
+      #renew404-launch::before {
+        content: '';
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(255, 248, 236, 0.09);
+        border-radius: 22px;
+        pointer-events: none;
+      }
+
+      #renew404-launch.is-leaving {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .launch-screen__content {
+        width: min(100%, 330px);
+        display: grid;
+        gap: 16px;
+        font-family: 'Aptos', 'Segoe UI Variable Text', 'PingFang SC', sans-serif;
+      }
+
+      .launch-screen__eyebrow {
+        margin: 0;
+        color: #ff681a;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        animation: launch-rise 520ms 100ms both;
+      }
+
+      .launch-screen__wordmark {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+        font-family: 'Aptos Display', 'Segoe UI Variable Display', 'PingFang SC', sans-serif;
+        font-size: clamp(44px, 14vw, 62px);
+        font-weight: 850;
+        line-height: 0.9;
+        letter-spacing: -0.075em;
+        animation: launch-rise 620ms 170ms both;
+      }
+
+      .launch-screen__wordmark strong {
+        color: #ff681a;
+        font: inherit;
+      }
+
+      .launch-screen__rule {
+        position: relative;
+        height: 3px;
+        overflow: hidden;
+        background: rgba(255, 248, 236, 0.13);
+      }
+
+      .launch-screen__rule::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: #ff681a;
+        transform-origin: left;
+        animation: launch-progress 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .launch-screen__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        color: #bdb5a9;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        animation: launch-rise 520ms 260ms both;
+      }
+
+      .launch-screen__signal {
+        display: inline-flex;
+        gap: 5px;
+      }
+
+      .launch-screen__signal i {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ff681a;
+        animation: launch-pulse 900ms ease-in-out infinite alternate;
+      }
+
+      .launch-screen__signal i:nth-child(2) { animation-delay: 160ms; }
+      .launch-screen__signal i:nth-child(3) { animation-delay: 320ms; }
+
+      @keyframes launch-rise {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes launch-progress {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+
+      @keyframes launch-pulse {
+        from { opacity: 0.25; transform: scale(0.72); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #renew404-launch { transition-duration: 1ms; }
+        #renew404-launch * { animation: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="renew404-launch" role="status" aria-label="正在启动 Renew404">
+      <div class="launch-screen__content">
+        <p class="launch-screen__eyebrow" data-i18n="launch.eyebrow">LOCAL-FIRST / RENEWAL TRACKER</p>
+        <div class="launch-screen__wordmark"><span>RENEW</span><strong>404</strong></div>
+        <div class="launch-screen__rule" aria-hidden="true"></div>
+        <div class="launch-screen__footer">
+          <span data-i18n="launch.tagline">周期有迹 · 续费有期</span>
+          <span class="launch-screen__signal" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
