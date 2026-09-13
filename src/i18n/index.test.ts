@@ -21,7 +21,10 @@ describe('i18n', () => {
     [['zh-Hant-HK'], 'zh-TW'],
     [['ja-JP'], 'ja'],
     [['en-US'], 'en'],
-    [['fr-FR'], 'zh-CN'],
+    [['fr-FR'], 'en'],
+    [['ru-RU'], 'en'],
+    [[], 'en'],
+    [['en-GB', 'zh-CN'], 'en'],
   ] as const)('detects supported locale from %j', (languages, expected) => {
     expect(detectSystemLocale(languages)).toBe(expected)
   })

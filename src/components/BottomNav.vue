@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ChartNoAxesColumnIncreasing, House, Settings, WalletCards } from '@lucide/vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from '../i18n'
 
 const route = useRoute()
-const { t } = useI18n()
-const studioUrl = ['127.0.0.1', 'localhost'].includes(window.location.hostname)
+const { t, locale } = useI18n()
+const studioOrigin = ['127.0.0.1', 'localhost'].includes(window.location.hostname)
   ? `http://${window.location.hostname}:4310/`
   : 'https://try404.com/'
+const studioUrl = computed(() => `${studioOrigin}?lang=${locale.value.startsWith('zh') ? 'zh' : 'en'}`)
 const items = [
   { to: '/', labelKey: '本月', icon: House, iconKey: 'house' },
   { to: '/services', labelKey: '服务', icon: WalletCards, iconKey: 'wallet-cards' },

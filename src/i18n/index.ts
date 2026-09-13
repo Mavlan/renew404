@@ -435,7 +435,7 @@ export function detectSystemLocale(
     if (/^ja(?:-|$)/.test(normalized)) return 'ja'
     if (/^en(?:-|$)/.test(normalized)) return 'en'
   }
-  return 'zh-CN'
+  return 'en'
 }
 
 function interpolate(message: string, params: Params): string {

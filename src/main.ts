@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './app/router'
 import { useAppStore } from './app/store'
+import type { AppLocale } from './domain/models'
 import './styles/tokens.css'
 import './styles/base.css'
 import './styles/utilities.css'
@@ -11,7 +12,20 @@ import './styles/catalogue.css'
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia).use(router)
-const refreshPromise = useAppStore(pinia).refresh()
+const store = useAppStore(pinia)
+const refreshPromise = (async () => {
+  await store.refresh()
+  await router.isReady()
+  const requested = router.currentRoute.value.query.lang
+  const supported: Record<string, AppLocale> = { en: 'en', zh: 'zh-CN', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', ja: 'ja' }
+  if (typeof requested === 'string' && Object.hasOwn(supported, requested)) {
+    await store.saveLocale(supported[requested]!)
+    const query = { ...router.currentRoute.value.query }
+    delete query.lang
+    // Consume the incoming choice once, so later in-app switches survive reloads.
+    await router.replace({ query })
+  }
+})()
 app.mount('#app')
 
 const launchScreen = document.querySelector<HTMLElement>('#renew404-launch')
