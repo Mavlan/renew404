@@ -18,7 +18,20 @@ describe('service templates', () => {
     expect(searchServiceTemplates('奈飞').map((item) => item.id)).toContain('netflix')
     expect(searchServiceTemplates('sufe').map((item) => item.id)).toContain('surfercloud')
     expect(searchServiceTemplates('冲浪云').map((item) => item.id)).toContain('surfercloud')
+    expect(searchServiceTemplates('Extra VM').map((item) => item.id)).toContain('extravm')
+    expect(searchServiceTemplates('游戏服务器').map((item) => item.id)).toContain('extravm')
     expect(searchServiceTemplates('', 'gaming').every((item) => item.categoryId === 'gaming')).toBe(true)
+  })
+
+  it('fills ExtraVM public hosting defaults without private or transaction data', () => {
+    const extravm = SERVICE_TEMPLATES.find((item) => item.id === 'extravm')!
+    expect(templateServiceDefaults(extravm)).toEqual({
+      name: 'ExtraVM', categoryId: 'cloud-servers', iconKey: 'extravm', color: '#00c3e6',
+      websiteUrl: 'https://extravm.com/', intervalValue: 1, intervalUnit: 'month',
+    })
+    expect(templateServiceDefaults(extravm)).not.toHaveProperty('amount')
+    expect(templateServiceDefaults(extravm)).not.toHaveProperty('nextRenewalDate')
+    expect(templateServiceDefaults(extravm)).not.toHaveProperty('accountHint')
   })
 
   it('fills SurferCloud public defaults without private or transaction data', () => {

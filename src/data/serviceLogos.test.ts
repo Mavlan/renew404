@@ -20,6 +20,11 @@ describe('service logo whitelist', () => {
     expect(SERVICE_LOGOS.chatgpt.url).not.toContain('service-logos/chatgpt')
   })
 
+  it('bundles the ExtraVM brand mark for offline use', () => {
+    expect(SERVICE_LOGOS.extravm.url).toMatch(/^(data:image\/svg\+xml|\/src\/assets\/service-logos\/extravm\.svg)/)
+    expect(SERVICE_LOGOS.extravm.url).not.toMatch(/^https?:\/\//)
+  })
+
   it('keeps icon resources local and never stores a third-party runtime URL', () => {
     for (const item of Object.values(SERVICE_LOGOS)) {
       expect(item.url || '').not.toMatch(/^https?:\/\//)

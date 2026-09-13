@@ -148,6 +148,24 @@ test('手机端可搜索并选择 SurferCloud 模板', async ({ page }) => {
   await expect(page.getByTestId('selected-template-preview').getByTestId('brand-logo')).toBeVisible()
 })
 
+test('手机端可搜索并选择 ExtraVM 模板', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/services/new')
+  await page.getByRole('button', { name: '打开服务库' }).click()
+  await page.getByLabel('搜索常用服务').fill('Extra VM')
+  const extravmOption = page.getByRole('button', { name: /ExtraVM.*云服务与服务器/ })
+  await expect(extravmOption).toBeVisible()
+  await expect(extravmOption.getByTestId('brand-logo')).toBeVisible()
+  await extravmOption.click()
+
+  await expect(page.getByLabel('名称 *')).toHaveValue('ExtraVM')
+  await expect(page.getByLabel('分类', { exact: true })).toHaveValue('cloud-servers')
+  await expect(page.getByLabel('官网链接')).toHaveValue('https://extravm.com/')
+  await expect(page.getByLabel('金额 *')).toHaveValue('')
+  await expect(page.getByLabel('下一次续费日期 *')).toHaveValue('')
+  await expect(page.getByTestId('selected-template-preview').getByTestId('brand-logo')).toBeVisible()
+})
+
 test('手机端可由 ChatGPT 模板新增、编辑并保存，且隐私字段保持为空', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto('/')
