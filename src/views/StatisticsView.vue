@@ -105,6 +105,13 @@ const hasData = computed(() => store.services.length > 0 || store.payments.lengt
       v-else
       :title="t('还没有可统计的数据')"
       :description="t('添加服务并记录付款后，这里会按币种展示计划与实际支出。')"
-    />
+    >
+      <RouterLink
+        class="button primary"
+        to="/services/new"
+      >
+        {{ t('新增服务') }}
+      </RouterLink>
+    </EmptyState>
   </section>
 </template>

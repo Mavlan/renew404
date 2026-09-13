@@ -79,8 +79,8 @@ const filtered = computed(() =>
     </div>
     <EmptyState
       v-else
-      :title="t('没有匹配的服务')"
-      :description="t('调整筛选条件，或添加一项新的周期服务。')"
+      :title="store.services.length ? t('没有匹配的服务') : t('empty.services')"
+      :description="store.services.length ? t('调整筛选条件，或添加一项新的周期服务。') : t('empty.description')"
     >
       <RouterLink
         class="button primary"
@@ -88,6 +88,14 @@ const filtered = computed(() =>
       >
         {{ t('新增服务') }}
       </RouterLink>
+      <button
+        v-if="query || status !== 'all' || category !== 'all'"
+        class="button secondary"
+        type="button"
+        @click="query = ''; status = 'all'; category = 'all'"
+      >
+        {{ t('filter.reset') }}
+      </button>
     </EmptyState>
   </section>
 </template>

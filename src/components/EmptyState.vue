@@ -5,9 +5,10 @@ defineProps<{ code?: string; title: string; description: string }>()
 <template>
   <div class="empty-state">
     <span
+      v-if="code"
       class="empty-code"
       aria-hidden="true"
-    >{{ code || '404' }}</span>
+    >{{ code }}</span>
     <h2>{{ title }}</h2>
     <p class="muted">
       {{ description }}

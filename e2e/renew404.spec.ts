@@ -296,7 +296,7 @@ test('首页语言入口可即时切换、自动保存并在刷新后保持', as
   expect(switcherBox!.height).toBeGreaterThanOrEqual(47.9)
   await expect(homeLanguage).toHaveValue('zh-CN')
   await homeLanguage.selectOption('zh-TW')
-  await expect(page.getByRole('heading', { name: '續費不該突然 404。' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /每一筆續費，.*心中有數。/ })).toBeVisible()
   await page.reload()
   await expect(homeLanguage).toHaveValue('zh-TW')
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-TW')

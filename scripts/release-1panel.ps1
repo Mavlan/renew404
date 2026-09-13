@@ -23,6 +23,7 @@ if ($workboxFiles.Count -ne 1) {
 $orderedEntries = @(
   'assets',
   'icons',
+  'fonts',
   'favicon.svg',
   'icon-maskable.svg',
   'icons.svg',
@@ -53,4 +54,3 @@ if ($indexPosition -lt 0 -or $workerPosition -ne ($archiveEntries.Count - 1) -or
 }
 
 Write-Host "1Panel release ready: $archivePath"
-

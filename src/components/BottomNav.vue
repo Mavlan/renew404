@@ -5,6 +5,9 @@ import { useI18n } from '../i18n'
 
 const route = useRoute()
 const { t } = useI18n()
+const studioUrl = ['127.0.0.1', 'localhost'].includes(window.location.hostname)
+  ? `http://${window.location.hostname}:4310/`
+  : 'https://try404.com/'
 const items = [
   { to: '/', labelKey: '本月', icon: House, iconKey: 'house' },
   { to: '/services', labelKey: '服务', icon: WalletCards, iconKey: 'wallet-cards' },
@@ -25,6 +28,17 @@ function isSelected(path: string) {
     :aria-label="t('主导航')"
   >
     <RouterLink
+      class="nav-brand"
+      to="/"
+    >
+      <img
+        src="/favicon.svg"
+        alt=""
+        width="30"
+        height="30"
+      ><strong>Renew<span>404</span></strong>
+    </RouterLink>
+    <RouterLink
       v-for="item in items"
       :key="item.to"
       :to="item.to"
@@ -42,5 +56,8 @@ function isSelected(path: string) {
       /></span>
       <span>{{ t(item.labelKey) }}</span>
     </RouterLink>
+    <div class="nav-foot">
+      <p>{{ t('nav.local') }}</p><a :href="studioUrl">{{ t('nav.studio') }}</a>
+    </div>
   </nav>
 </template>

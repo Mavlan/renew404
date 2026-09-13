@@ -1,5 +1,6 @@
 import { readonly, ref } from 'vue'
 import type { AppLocale, ServiceCategory } from '../domain/models'
+import { redesignMessages } from './redesign'
 
 type Params = Record<string, string | number>
 type Messages = Record<string, string>
@@ -411,10 +412,10 @@ const staticTranslations: Record<Exclude<AppLocale, 'zh-CN'>, Messages> = {
 }
 
 const dictionaries: Record<AppLocale, Messages> = {
-  'zh-CN': zhCN,
-  'zh-TW': { ...zhTW, ...staticTranslations['zh-TW'] },
-  en: { ...en, ...staticTranslations.en },
-  ja: { ...ja, ...staticTranslations.ja },
+  'zh-CN': { ...zhCN, ...redesignMessages['zh-CN'] },
+  'zh-TW': { ...zhTW, ...staticTranslations['zh-TW'], ...redesignMessages['zh-TW'] },
+  en: { ...en, ...staticTranslations.en, ...redesignMessages.en },
+  ja: { ...ja, ...staticTranslations.ja, ...redesignMessages.ja },
 }
 
 const currentLocale = ref<AppLocale>('zh-CN')

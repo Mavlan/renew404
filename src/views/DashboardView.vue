@@ -6,6 +6,7 @@ import CurrencyAmount from '../components/CurrencyAmount.vue'
 import EmptyState from '../components/EmptyState.vue'
 import LanguageSwitcher from '../components/LanguageSwitcher.vue'
 import RenewalCard from '../components/RenewalCard.vue'
+import DemoPreview from '../components/DemoPreview.vue'
 import type { SubscriptionService } from '../domain/models'
 import { getNextRenewalDate } from '../domain/recurrence'
 import { dueWithinDays, overdueServices, paidForMonth, plannedForMonth } from '../domain/statistics'
@@ -45,34 +46,50 @@ async function finishOnboarding() {
       v-if="!store.settings?.onboardingComplete && store.services.length === 0"
       class="onboarding"
     >
-      <LanguageSwitcher class="onboarding-language" />
-      <p class="eyebrow">
-        LOCAL FIRST / NO ACCOUNT
-      </p>
-      <h1>{{ t('续费不该突然 404。') }}</h1>
-      <p class="lede">
-        {{ t('Renew404 在本机记录周期性续费。没有账号，没有云端，也没有付费 API。') }}
-      </p>
-      <ol class="onboarding-points">
-        <li><b>01</b><span>{{ t('数据默认只保存在此设备的 IndexedDB。') }}</span></li>
-        <li><b>02</b><span>{{ t('建议定期导出 JSON 备份。') }}</span></li>
-        <li><b>03</b><span>{{ t('精确提醒通过手动导入 .ics 日历文件实现。') }}</span></li>
-      </ol>
-      <div class="action-stack">
-        <RouterLink
-          class="button primary wide"
-          to="/services/new"
-          @click="finishOnboarding"
-        >
-          {{ t('添加第一个服务') }}
-        </RouterLink>
-        <RouterLink
-          class="button secondary wide"
-          to="/settings"
-        >
-          {{ t('从备份恢复') }}
-        </RouterLink>
+      <div class="onboarding-copy">
+        <LanguageSwitcher class="onboarding-language" />
+        <p class="eyebrow">
+          LOCAL FIRST / NO ACCOUNT
+        </p>
+        <h1>
+          <span
+            v-for="(line, index) in t('intro.headline').split('，')"
+            :key="line"
+            class="intro-line"
+          >{{ line }}{{ index === 0 && t('intro.headline').includes('，') ? '，' : '' }}</span>
+        </h1>
+        <p class="lede">
+          {{ t('intro.description') }}
+        </p>
+        <div class="action-stack">
+          <RouterLink
+            class="button primary"
+            to="/services/new"
+            @click="finishOnboarding"
+          >
+            {{ t('添加第一个服务') }}
+          </RouterLink>
+          <RouterLink
+            class="button secondary"
+            to="/demo"
+          >
+            {{ t('intro.demo') }}
+          </RouterLink>
+          <RouterLink
+            class="text-link onboarding-restore"
+            to="/settings"
+          >
+            {{ t('从备份恢复') }}
+          </RouterLink>
+        </div>
+        <p class="onboarding-private">
+          {{ t('intro.private') }}
+        </p>
+        <details class="onboarding-details">
+          <summary>{{ t('intro.details') }}</summary><p>{{ t('intro.backup') }}</p><p>{{ t('intro.calendar') }}</p>
+        </details>
       </div>
+      <DemoPreview />
     </div>
     <template v-else>
       <header class="dashboard-header">

@@ -6,6 +6,7 @@ import { useAppStore } from './app/store'
 import './styles/tokens.css'
 import './styles/base.css'
 import './styles/utilities.css'
+import './styles/catalogue.css'
 
 const app = createApp(App)
 const pinia = createPinia()

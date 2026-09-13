@@ -1,0 +1,50 @@
+import { expect, test } from '@playwright/test'
+
+test('desktop example is readable in both website languages', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1100 })
+  await page.goto('/settings')
+  await page.getByRole('combobox', { name: '主题 跟随系统或固定显示', exact: true }).selectOption('light')
+  await page.getByRole('button', { name: '保存偏好', exact: true }).click()
+  await page.goto('/demo')
+  await expect(page.locator('#renew404-launch')).toBeHidden()
+  const preview = page.getByTestId('demo-preview')
+  await expect(preview).toContainText('$30.49')
+  await preview.screenshot({ path: '../evidence/renew-preview-zh.png', scale: 'css' })
+  await page.getByRole('combobox', { name: '语言', exact: true }).selectOption('en')
+  await expect(preview).toContainText('Cloud server')
+  await preview.screenshot({ path: '../evidence/renew-preview-en.png', scale: 'css' })
+})
+
+test('demo filters do not write service or payment records', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('link', { name: '先看看示例' }).click()
+  const preview = page.getByTestId('demo-preview')
+  await expect(preview).toContainText('$30.49')
+  await page.getByRole('button', { name: '未来 7 天', exact: true }).click()
+  await expect(preview).toContainText('$19.50')
+  await expect(preview).not.toContainText('音乐订阅')
+  await page.getByRole('link', { name: '返回应用', exact: true }).click()
+  await expect(page.getByRole('link', { name: '添加第一个服务' })).toBeVisible()
+  await page.getByRole('link', { name: '服务', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '从第一项续费开始' })).toBeVisible()
+  await page.getByRole('link', { name: '统计', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '还没有可统计的数据' })).toBeVisible()
+  await expect(page.getByRole('link', { name: '新增服务' })).toBeVisible()
+})
+
+test('onboarding actions and responsive navigation remain visible', async ({ page }) => {
+  await page.goto('/')
+  for (const viewport of [{width:375,height:667},{width:390,height:844},{width:1280,height:720},{width:1440,height:900}]) {
+    await page.setViewportSize(viewport)
+    const cta=page.getByRole('link',{name:'添加第一个服务'})
+    await cta.scrollIntoViewIfNeeded()
+    const box=await cta.boundingBox()
+    expect(box).not.toBeNull()
+    const visible=await page.evaluate(({x,y})=>document.elementFromPoint(x,y)?.closest('a')?.getAttribute('href'),{x:box!.x+box!.width/2,y:box!.y+box!.height/2})
+    expect(visible).toBe('/services/new')
+    const layout=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}))
+    expect(layout.scroll).toBeLessThanOrEqual(layout.width)
+    if(viewport.width>=1050)await expect(page.locator('.nav-brand')).toBeVisible()
+    else await expect(page.locator('.nav-brand')).toBeHidden()
+  }
+})

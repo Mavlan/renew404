@@ -6,10 +6,12 @@ import StatisticsView from '../views/StatisticsView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ServiceDetailView from '../views/ServiceDetailView.vue'
 import ServiceEditorView from '../views/ServiceEditorView.vue'
+import DemoView from '../views/DemoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { path: '/demo', name: 'demo', component: DemoView },
     {
       path: '/',
       component: AppShell,
