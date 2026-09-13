@@ -173,6 +173,16 @@ export const SERVICE_TEMPLATES: readonly ServiceTemplate[] = [
     'https://www.cloudflare.com/',
   ),
   template(
+    'extravm',
+    'ExtraVM',
+    ['Extra VM', 'VPS Hosting', 'Game Servers', '游戏服务器', 'VPS', '云服务器', '服务器托管'],
+    'cloud-servers',
+    'extravm',
+    '#00c3e6',
+    'https://extravm.com/',
+    monthly,
+  ),
+  template(
     'surfercloud',
     'SurferCloud',
     ['Surfer Cloud', 'sufe', '冲浪云', '云服务器', '云主机', 'VPS', 'ULightHost', 'UHost'],

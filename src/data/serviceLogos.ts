@@ -57,6 +57,7 @@ import chatgptUrl from '@lobehub/icons-static-svg/icons/openai.svg'
 import grokUrl from '@lobehub/icons-static-svg/icons/grok.svg'
 import midjourneyUrl from '@lobehub/icons-static-svg/icons/midjourney.svg'
 import runwayUrl from '@lobehub/icons-static-svg/icons/runway.svg'
+import extravmUrl from '../assets/service-logos/extravm.svg'
 import surfercloudUrl from '../assets/service-logos/surfercloud.svg'
 
 export interface LocalServiceLogo {
@@ -91,6 +92,7 @@ export const SERVICE_LOGOS: Readonly<Record<string, LocalServiceLogo>> = {
   'adobe-creative-cloud': iconify('Adobe Creative Cloud', 'DA1F26', adobeCreativeCloudIcon),
   postman: logo(siPostman),
   cloudflare: logo(siCloudflare),
+  extravm: { title: 'ExtraVM', hex: '00C3E6', url: extravmUrl },
   surfercloud: { title: 'SurferCloud', hex: '1C60F5', url: surfercloudUrl },
   vercel: logo(siVercel),
   netlify: logo(siNetlify),
